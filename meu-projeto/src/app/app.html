@@ -1,2 +1,3 @@
-<app-header></app-header>
+<app-header [titulo2]="'Titulo criado no App'" (logout)="fazerLogout()"
+	  (utilizadorSelecionado)="receber($event)"></app-header>
 <router-outlet />

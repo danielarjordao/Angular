@@ -10,4 +10,10 @@ import { Header } from './header/header';
 })
 export class App {
   protected readonly title = signal('meu-projeto');
+  fazerLogout() {
+    alert('Logout realizado!');
+  }
+  receber(nome: string) {
+    alert('Utilizador selecionado: ' + nome);
+  }
 }
