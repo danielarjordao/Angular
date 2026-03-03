@@ -1,148 +1,153 @@
-# Angular
+# Sessão 25 — Introdução ao Angular
 
-## Definição
+## Angular no ecossistema frontend
 
-Angular é um framework de desenvolvimento web de código aberto mantido pelo Google. Ele é usado para criar aplicações web de página única (SPA) e é conhecido por sua estrutura robusta, modularidade e suporte a TypeScript.
+### O que é Angular?
 
-**Features principais:**
+Angular é um **framework frontend completo** (Google) para construir aplicações web modernas. Ele já traz recursos principais do dia a dia:
 
-- **Interface e Componentes:** Angular utiliza uma abordagem baseada em componentes para construir interfaces de usuário, permitindo a reutilização de código e a organização modular.
-- **Roteamento:** Angular possui um sistema de roteamento integrado que facilita a navegação entre diferentes partes da aplicação.
-- **Comunicação com API:** Angular oferece suporte para comunicação com APIs RESTful, facilitando a integração com backends e serviços externos.
-- **Formulários:** Angular oferece suporte avançado para formulários, incluindo validação e manipulação de dados.
-- **Injeção de Dependência:** Angular possui um sistema de injeção de dependência que facilita a gestão de serviços e componentes, promovendo a modularidade e a testabilidade do código.
-- **CLI (Command Line Interface):** Angular CLI é uma ferramenta de linha de comando que facilita a criação, desenvolvimento e manutenção de projetos Angular, automatizando tarefas comuns como geração de componentes, serviços e testes.
+- Componentes e templates;
+- Roteamento (routing);
+- HTTP Client;
+- Forms;
+- Injeção de dependências;
+- Ferramentas de projeto (CLI).
 
-## Ecossistema
+### O que é React?
 
-### React
+React é uma **biblioteca** (Meta) focada na camada de interface e renderização reativa com componentes.
 
-React é uma biblioteca JavaScript para construção de interfaces de usuário, mantida pelo Facebook. Ele é focado na criação de componentes reutilizáveis e na renderização eficiente da interface.
+### Framework vs Biblioteca (resumo)
 
-**Features principais:**
+- **Angular (framework):** define mais estrutura e padrões;
+- **React (biblioteca):** fornece a base de UI, e a arquitetura final depende das bibliotecas escolhidas.
 
-- **Componentes:** React utiliza uma abordagem baseada em componentes para construir interfaces de usuário, permitindo a reutilização de código e a organização modular.
-- **Renderização Virtual:** React utiliza um DOM virtual para otimizar a renderização da interface, melhorando o desempenho da aplicação.
+### Analogia prática
 
-### Frameworks vs Bibliotecas
+- **Angular decide mais por você:** estrutura, integração e fluxo padrão;
+- **React dá mais liberdade:** você escolhe como combinar as peças.
 
-- **Frameworks:** Fornecem uma estrutura completa para o desenvolvimento de aplicações, incluindo regras e diretrizes a serem seguidas. Exemplo: Angular.
-- **Bibliotecas:** Oferecem funcionalidades específicas que podem ser usadas em conjunto com outras bibliotecas ou frameworks. Exemplo: React.
+## Angular + TypeScript
 
-## Angular e TypeScript
+Angular usa TypeScript como linguagem principal, trazendo:
 
-Angular é construído usando TypeScript, uma linguagem de programação que é um superconjunto de JavaScript. TypeScript adiciona recursos como tipagem estática, classes e interfaces, o que ajuda a melhorar a qualidade do código e a facilitar a manutenção de grandes aplicações.
-
-**Principais especificações do TypeScript:**
-
-- **Tipagem Forte:** TypeScript permite definir tipos para variáveis, funções e objetos, o que ajuda a detectar erros em tempo de compilação.
-- **Classes e Interfaces:** TypeScript suporta a definição de classes e interfaces, facilitando a organização e a estruturação do código.
-- **Detecta Erros em Tempo de Compilação:** TypeScript verifica o código durante a compilação, ajudando a identificar erros antes que o código seja executado.
-- **Maior escalabilidade:** TypeScript é especialmente útil para projetos grandes, pois ajuda a manter o código organizado e fácil de entender.
+- Tipagem forte;
+- Classes e interfaces;
+- Detecção antecipada de erros;
+- Melhor manutenção e escalabilidade.
 
 ## Angular CLI
 
-Angular CLI é uma ferramenta de linha de comando que facilita a criação, desenvolvimento e manutenção de projetos Angular. Ele automatiza tarefas comuns como geração de componentes, serviços e testes, além de fornecer comandos para iniciar o servidor de desenvolvimento, construir a aplicação para produção e executar testes.
+### O que é?
 
-**Utilidades do Angular CLI:**
+CLI (Command Line Interface) oficial para:
 
-- **Criar novo projeto:** `ng new nome-do-projeto`
-- **Gerar componente:** `ng generate component nome-do-componente`
-- **Gerar serviço:** `ng generate service nome-do-servico`
-- **Iniciar servidor de desenvolvimento:** `ng serve`
-- **Construir aplicação para produção:** `ng build --prod`
-- **Executar localmente:** `ng serve --open`
-- **Executar testes:** `ng test`
-- **Executar testes de end-to-end:** `ng e2e`
+- Criar projetos;
+- Gerar artefatos (componentes, serviços etc.);
+- Executar localmente;
+- Gerar build de produção.
 
-### Por que usar Angular CLI?
-
-- **Automatização de tarefas:** Angular CLI automatiza tarefas comuns, economizando tempo e esforço dos desenvolvedores.
-- **Padronização:** Angular CLI ajuda a manter uma estrutura de projeto consistente, facilitando a colaboração entre desenvolvedores.
-- **Facilidade de uso:** Angular CLI é fácil de usar e oferece uma interface de linha de comando intuitiva, tornando o processo de desenvolvimento mais eficiente.
-- **Suporte a melhores práticas:** Angular CLI segue as melhores práticas de desenvolvimento Angular, ajudando os desenvolvedores a escrever código de alta qualidade e fácil de manter.
-
-### Instalação do Angular CLI
-
-Para instalar o Angular CLI, siga os passos abaixo:
+### Comandos essenciais
 
 ```bash
 npm install -g @angular/cli
-
-// Verificar a instalação
 ng version
-```
 
-### Iniciando um novo projeto Angular
+ng new meu-projeto
+ng serve
 
-Para iniciar um novo projeto Angular, use o comando:
-
-```bash
-ng new nome-do-projeto
-```
-
-Siga as instruções para configurar o projeto, escolhendo as opções desejadas:
-
-- **Would you like to add Angular routing?** Sim
-- **Which stylesheet format would you like to use?** CSS
-
-Esse comando criará uma nova pasta com o nome do projeto, contendo a estrutura básica de um aplicativo Angular.
-
-### Executando a aplicação Angular
-
-Para executar a aplicação Angular, use o comando:
-
-```bash
-cd meu-projeto
-ng serve --open
-```
-
-Esse comando compila a aplicação e inicia um servidor de desenvolvimento. A opção `--open` (ou `-o`) faz com que o navegador seja aberto automaticamente na URL onde a aplicação está sendo servida, geralmente em `http://localhost:4200/`. A partir daí, você pode começar a desenvolver sua aplicação Angular, editando os arquivos na pasta `src/app` e vendo as mudanças refletidas em tempo real no navegador.
-
-### Gerando componentes e serviços
-
-Para gerar um novo componente, use o comando:
-
-```bash
 ng generate component header
+# abreviação:
+ng g c header
 ```
 
-Isso criará uma nova pasta chamada `header` dentro da pasta `src/app`, contendo os arquivos necessários para o componente, como `header.component.ts`, `header.component.html`, `header.component.css` e `header.component.spec.ts`.
+### O que o `ng serve` faz
 
-Após gerar o componente, você pode usá-lo em seu aplicativo Angular, importando-o no módulo apropriado `app.ts` e adicionando a tag do componente no arquivo `app.html`:
+- Compila TypeScript em JavaScript;
+- Inicia servidor local;
+- Observa alterações no código;
+- Recarrega automaticamente (hot reload no fluxo de desenvolvimento).
 
-```ts
-import { HeaderComponent } from './header/header.component';
+## Anatomia do projeto Angular
 
-@Component({
-// ...
-    imports: [RouterOutlet, Header],
-// ...
-})
-```
+### Estrutura geral
 
-```html
-<app-header></app-header>
-```
+Ao criar um projeto com CLI, os principais pontos são:
 
-## Módulos vs Componentes
+- `src/`: código-fonte da aplicação;
+- `src/index.html`: página base carregada no navegador;
+- `src/main.ts`: ponto de entrada da aplicação;
+- `src/app/`: componentes e configuração principal.
 
-### Módulos
+### `index.html`
 
-Módulos são usados para organizar o código em Angular. Eles agrupam componentes, serviços e outros recursos relacionados, facilitando a manutenção e a escalabilidade da aplicação. O módulo principal é o `AppModule`, que é o ponto de entrada da aplicação.
+Contém a tag raiz (ex.: `<app-root></app-root>`), onde o Angular renderiza a aplicação.
 
-### Componentes
+### `main.ts`
 
-Componentes são as unidades básicas de construção da interface de usuário em Angular. Cada componente é responsável por uma parte específica da interface e é composto por um arquivo TypeScript, um arquivo HTML e um arquivo CSS. Os componentes são declarados em módulos e podem ser reutilizados em diferentes partes da aplicação.
+Dispara a inicialização via `bootstrapApplication(...)`, carregando o componente raiz.
 
-#### O que é um componente?
+### Pasta `app/`
 
-Um componente é uma parte fundamental de um aplicativo Angular. Ele é responsável por controlar uma parte da interface do usuário e a lógica associada a essa parte. Um componente é composto por três arquivos principais:
+Aqui fica a implementação da aplicação (componente raiz + demais componentes).
 
-- **TypeScript**: Define a lógica do componente, incluindo propriedades, métodos e o comportamento do componente.
-- **HTML**: Define a estrutura da interface do usuário para o componente.
-- **CSS**: Define o estilo visual do componente.
+### `app.ts` (componente raiz)
 
-#### O que é um @Component?
+- Define comportamento e metadata do componente principal;
+- O `selector` deve corresponder à tag usada no `index.html`.
 
-O `@Component` é um decorator em Angular que marca uma classe como um componente e fornece metadados que determinam como o componente deve ser processado, instanciado e usado em tempo de execução. Ele é usado para definir a estrutura, o estilo e a lógica de um componente Angular. O `@Component` é essencial para criar componentes em Angular, pois ele permite que você especifique o seletor, o template e os estilos do componente, entre outras configurações.
+### `app.spec.ts`
+
+- Arquivo de testes automatizados gerado pelo CLI;
+- Não é foco inicial, mas é importante para qualidade e regressão.
+
+## Componentes e metadata
+
+### O que é um componente?
+
+Unidade fundamental da aplicação Angular. Normalmente combina:
+
+- Estrutura (HTML);
+- Estilo (CSS);
+- Lógica (TypeScript).
+
+### O que é `@Component`?
+
+Decorator que informa ao Angular como a classe deve funcionar como componente, por exemplo:
+
+- `selector` (nome da tag);
+- `templateUrl` (arquivo HTML);
+- `styleUrl`/`styleUrls` (arquivo(s) CSS).
+
+### Classe do componente
+
+A classe concentra a lógica e os dados usados no template.
+
+## Bootstrap da aplicação
+
+### Conceito
+
+Bootstrap é o processo de inicialização do Angular.
+
+### Fluxo mental (ordem)
+
+1. Navegador carrega `index.html`;
+2. Angular inicia a partir de `main.ts`;
+3. `bootstrapApplication(AppComponent, ...)` é executado;
+4. O `AppComponent` é associado ao seletor (ex.: `app-root`);
+5. A interface aparece no DOM.
+
+> Em projetos com SSR, há também arquivos de servidor como `main.server.ts`, mas o fluxo base no cliente continua partindo de `main.ts`.
+
+## Decorators no Angular
+
+Decorator é uma função que adiciona metadata a classes/funções, permitindo ao Angular interpretar o papel daquela estrutura.
+
+Principais decorators:
+
+- `@Component` → componente;
+- `@Injectable` → serviço para DI;
+- `@Directive` → comportamento reutilizável no template;
+- `@Pipe` → transformação de dados na view.
+
+Sem decorators, a classe seria apenas TypeScript “puro”, sem integração com o motor do Angular.
