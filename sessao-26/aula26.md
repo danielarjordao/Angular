@@ -1,68 +1,173 @@
-# Angular
+# Sessão 26 — Templates, Data Binding, Diretivas e Pipes
 
-## Data Binding
+## Fundamentos de Data Binding
 
-### O que é Data Binding?
+### O que é?
 
-Data Binding é um mecanismo que permite a comunicação entre o componente e a view em Angular. Ele facilita a sincronização de dados entre o modelo (componente) e a interface do usuário (view). Existem quatro tipos principais de Data Binding em Angular:
+Data Binding é o mecanismo que conecta o estado do componente (TS) ao template (HTML). Com isso, conseguimos:
 
-1. **Interpolation (Interpolação)**: Permite a exibição de dados do componente na view usando a sintaxe `{{ }}`. Por exemplo, `{{ title }}` exibirá o valor da propriedade `title` do componente.
+- Exibir dados no template;
+- Atualizar a interface automaticamente quando o estado muda;
+- Capturar ações do utilizador e executar lógica no componente.
 
-2. **Property Binding (Vinculação de Propriedades)**: Permite a vinculação de propriedades do componente a elementos HTML usando a sintaxe `[ ]`. Por exemplo, `[src]="imageUrl"` vincula a propriedade `imageUrl` do componente ao atributo `src` de uma tag `<img>`.
+### 4 tipos principais
 
-3. **Event Binding (Vinculação de Eventos)**: Permite a vinculação de funções de eventos do componente a elementos HTML usando a sintaxe `( )`. Por exemplo, `(click)="onButtonClick()"` vincula a função `onButtonClick` do componente ao evento `click` de um elemento HTML.
+1. **Interpolation `{{ }}`** (TS → HTML)
+   - Exibe valores de propriedades/métodos do componente no template.
+   - Exemplo:
 
-4. **Two-way Data Binding (Vinculação de Dados de Duas Ways)**: Permite a sincronização bidirecional de dados entre o componente e a view usando a sintaxe `[( )]`. Por exemplo, `[(ngModel)]="name"` vincula a propriedade `name` do componente a um campo de entrada, permitindo que as mudanças sejam refletidas em ambos os lados.
+```html
+<h1>{{ titulo }}</h1>
+<p>{{ saudacao() }}</p>
+```
 
-### Diretivas de Estrutura
+2. **Property Binding `[ ]`** (TS → propriedade do elemento)
+   - Envia dados para propriedades do DOM/componente.
+   - Exemplo:
 
-As diretivas de estrutura em Angular são usadas para alterar a estrutura do DOM. As principais diretivas de estrutura são:
+```html
+<img [src]="fotoUrl" [alt]="nome" />
+<button [disabled]="carregando">Salvar</button>
+```
 
-1. **If**: Permite a exibição condicional de elementos com base em uma expressão. Por exemplo:
+3. **Event Binding `( )`** (evento do HTML → método TS)
+   - Escuta eventos e executa métodos do componente.
+   - Exemplo:
+
+```html
+<button (click)="incrementar()">+1</button>
+<input (input)="atualizarTexto($event)" />
+```
+
+4. **Two-way Data Binding `[()]`** (TS ↔ HTML)
+   - Comunicação bidirecional entre campo e propriedade.
+   - Exemplo:
+
+```html
+<input [(ngModel)]="nome" placeholder="Digite seu nome" />
+<p>Olá, {{ nome }}</p>
+```
+
+> Para usar `[(ngModel)]`, é necessário importar `FormsModule` no componente/módulo onde o input está sendo usado.
+
+## Diretivas Estruturais
+
+### O que são?
+
+Diretivas estruturais controlam criação/remoção de elementos no DOM. Elas permitem:
+
+- Renderização condicional;
+- Renderização de listas;
+- Controle de fluxo de exibição.
+
+### `@if`, `@else if`, `@else`
 
 ```html
 @if (isLoggedIn) {
-  <p>Bem-vindo, usuário!</p>
-} @else if {isAdmin} {
+  <p>Bem-vindo, utilizador!</p>
+} @else if (isAdmin) {
   <p>Bem-vindo, administrador!</p>
-} else {
+} @else {
   <p>Por favor, faça login.</p>
 }
 ```
 
-2. **For**: Itera sobre uma coleção de itens e cria um novo elemento para cada item. Por exemplo:
+### `@for`
 
 ```html
-@for (let i = 0; i < items.length; i++) {
-   <p>{{ items[i] }}</p>
+@for (item of itens; track item.id) {
+  <p>{{ item.nome }}</p>
 }
 ```
 
-3. **Switch**: Permite a exibição de elementos com base em uma expressão de switch. Por exemplo:
+> A forma moderna com `@for` usa `track` para melhorar desempenho de renderização.
+
+### `@switch`, `@case`, `@default`
 
 ```html
-@switch (userRole) {
-  @case 'admin':
-    <p>Bem-vindo, administrador!</p>
-  @case 'user':
-    <p>Bem-vindo, usuário!</p>
-  @default:
-	<p>Bem-vindo, visitante!</p>
+@switch (perfil) {
+  @case ('admin') {
+    <p>Acesso total</p>
+  }
+  @case ('user') {
+    <p>Acesso padrão</p>
+  }
+  @default {
+    <p>Acesso visitante</p>
+  }
 }
 ```
+
+### Observação importante
+
+- Na sintaxe antiga (`*ngIf`, `*ngFor`, `*ngSwitch`), geralmente usamos `CommonModule`.
+- Na sintaxe nova (`@if`, `@for`, `@switch`), o fluxo fica mais próximo do TypeScript e mais legível.
+
+## Templates reativos e eventos
+
+Template reativo em Angular significa declarar **o que deve aparecer** com base no estado atual do componente.
+
+Exemplo de combinação:
+
+- Propriedade de estado (`carregando`, `lista`, `perfil`);
+- Eventos (`click`, `input`) alterando estado;
+- Diretivas estruturais decidindo o que renderizar;
+- Pipes formatando saída final.
 
 ## Pipes
 
-Pipes são usados para transformar dados em Angular. Eles permitem que você formate ou transforme os dados antes de exibi-los na view. Alguns exemplos de pipes comuns incluem:
+### Definição
 
-1. **DatePipe**: Formata datas. Por exemplo, `{{ today | date:'shortDate' }}` exibirá a data atual no formato curto.
+Pipes transformam dados diretamente no template, sem alterar o valor original no TypeScript.
 
-2. **NumberPipe**: Formata números. Por exemplo, `{{ value | number:'1.2-2' }}` exibirá o valor com duas casas decimais.
+### Pipes nativos comuns
 
-3. **CurrencyPipe**: Formata valores monetários. Por exemplo, `{{ price | currency:'USD' }}` exibirá o preço formatado como moeda em dólares.
+- `date`: `{{ hoje | date:'dd/MM/yyyy' }}`
+- `date` com parâmetros: `{{ hoje | date:'fullDate':'':'pt-PT' }}`
+- `currency`: `{{ preco | currency:'EUR' }}`
+- `percent`: `{{ taxa | percent:'1.0-2' }}`
+- `number`: `{{ nota | number:'1.2-2' }}`
+- `uppercase`: `{{ nome | uppercase }}`
+- `lowercase`: `{{ nome | lowercase }}`
 
-4. **UpperCasePipe**: Converte texto para maiúsculas. Por exemplo, `{{ name | uppercase }}` exibirá o nome em letras maiúsculas.
+### Pipes vs lógica no TS
 
-5. **LowerCasePipe**: Converte texto para minúsculas. Por exemplo, `{{ name | lowercase }}` exibirá o nome em letras minúsculas.
+- **Pipe no HTML:** rápido para formatação declarativa;
+- **Lógica no TS:** melhor quando há regra de negócio complexa.
 
-6. **Custom Pipes**: Você também pode criar seus próprios pipes personalizados para atender a necessidades específicas de formatação ou transformação de dados. Utilizando o comando `ng generate pipe nome-do-pipe`, você pode criar um pipe personalizado e implementá-lo de acordo com suas necessidades.
+## Pipes customizados
+
+### Quando usar?
+
+Quando os pipes nativos não resolvem sua necessidade de transformação.
+
+### Gerar com Angular CLI
+
+```bash
+ng generate pipe saudacao
+```
+
+ou forma curta:
+
+```bash
+ng g p saudacao
+```
+
+### Estrutura essencial de um pipe
+
+- Decorator `@Pipe(...)`: registra nome e configuração;
+- Método `transform(...)`: recebe valor e devolve valor transformado.
+
+### Exemplo didático — saudação por horário
+
+Ideia de regra:
+
+- Manhã → “Bom dia”;
+- Tarde → “Boa tarde”;
+- Noite → “Boa noite”.
+
+Uso no template:
+
+```html
+<p>{{ nome | saudacao }}</p>
+```
