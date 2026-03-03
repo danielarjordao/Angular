@@ -2,6 +2,8 @@ import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angu
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SaudacaoPipe } from '../pipes/saudacao/saudacao-pipe';
+import { BlogInterface } from '../blog-interface';
+import { UserService } from '../user-service';
 
 @Component({
   selector: 'app-header',
@@ -11,6 +13,8 @@ import { SaudacaoPipe } from '../pipes/saudacao/saudacao-pipe';
 })
 
 export class Header  implements OnInit, OnDestroy {
+  utilizadores: Array<string> = [];
+  posts: Array<BlogInterface> = [];
   titulo: string = 'Meu Projeto';
   logotipo: string = 'logo.png';
   nome: string = '';
@@ -22,6 +26,10 @@ export class Header  implements OnInit, OnDestroy {
   @Input() titulo2!: string;
   @Output() logout = new EventEmitter<void>();
   @Output() utilizadorSelecionado = new EventEmitter<string>();
+
+  constructor(private userService: UserService) {
+  }
+
   Clicar() {
     alert('Botão clicado!');
   }
@@ -32,7 +40,11 @@ export class Header  implements OnInit, OnDestroy {
     this.utilizadorSelecionado.emit("Ana");
   }
   ngOnInit() {
-    console.log('Header componente inicializado');
+    this.utilizadores = this.userService.getUtilizadores();
+    this.userService.getPosts().subscribe(posts => {
+      this.posts = posts;
+      console.log('Posts recebidos:', posts);
+    });
   }
   ngOnDestroy() {
     console.log('Header componente destruído');

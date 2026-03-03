@@ -35,3 +35,15 @@
 <p>Data de hoje personalizada: {{ hoje | date:'dd/MM/yyyy' }}</p>
 
 <p>{{ "Daniela" | saudacao }}</p>
+
+<ul>
+  @for (item of utilizadores; track item) {
+    <li>{{ item }}</li>
+  }
+</ul>
+
+<ul>
+  @for (post of posts; track post.id) {
+    <li>{{ post.title }}</li>
+  }
+</ul>
