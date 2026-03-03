@@ -26,9 +26,9 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class MensagemService {
-	obterSaudacao(): string {
-		return 'Olá, Angular!';
-	}
+  obterSaudacao(): string {
+   return 'Olá, Angular!';
+  }
 }
 ```
 
