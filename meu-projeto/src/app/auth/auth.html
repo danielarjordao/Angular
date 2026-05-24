@@ -1,0 +1,15 @@
+<form [formGroup]="form">
+  <input formControlName="nome" type="text" placeholder="Nome">
+  @if (form.get('nome')?.invalid && form.get('nome')?.touched) {
+	<p>O nome é obrigatório e deve ter pelo menos 3 caracteres.</p>
+  }
+  <input formControlName="email" type="email" placeholder="Email">
+  @if (form.get('email')?.invalid && form.get('email')?.touched) {
+	<p>O email é obrigatório e deve ser válido.</p>
+  }
+  <input formControlName="palavraPasse" type="password" placeholder="Palavra-passe">
+  @if (form.get('palavraPasse')?.invalid && form.get('palavraPasse')?.touched) {
+	<p>A palavra-passe é obrigatória e deve ter pelo menos 6 caracteres.</p>
+  }
+  <button type="submit" (click)="onSubmit()" [disabled]="form.invalid">Entrar</button>
+</form>
