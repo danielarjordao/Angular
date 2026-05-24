@@ -53,21 +53,21 @@ import { Component } from '@angular/core';
 import { MensagemService } from './mensagem.service';
 
 @Component({
-	selector: 'app-home',
-	template: '<p>{{ mensagem }}</p>'
+ selector: 'app-home',
+ template: '<p>{{ mensagem }}</p>'
 })
 export class HomeComponent {
-	mensagem = '';
+ mensagem = '';
 
-	constructor(private mensagemService: MensagemService) {
-		this.mensagem = this.mensagemService.obterSaudacao();
-	}
+ constructor(private mensagemService: MensagemService) {
+  this.mensagem = this.mensagemService.obterSaudacao();
+ }
 }
 ```
 
 ## Observables
 
-### O que são?
+### O que são
 
 Observables representam fluxos de dados ao longo do tempo.
 
@@ -90,7 +90,7 @@ import { of } from 'rxjs';
 const nomes$ = of('Ana', 'Bruno', 'Carla');
 
 nomes$.subscribe((nome) => {
-	console.log(nome);
+ console.log(nome);
 });
 ```
 
@@ -98,7 +98,7 @@ nomes$.subscribe((nome) => {
 
 ```ts
 obterUtilizadores(): Observable<Utilizador[]> {
-	return this.http.get<Utilizador[]>('/api/utilizadores');
+ return this.http.get<Utilizador[]>('/api/utilizadores');
 }
 ```
 
@@ -106,7 +106,7 @@ No componente:
 
 ```ts
 this.utilizadorService.obterUtilizadores().subscribe((dados) => {
-	this.utilizadores = dados;
+ this.utilizadores = dados;
 });
 ```
 
